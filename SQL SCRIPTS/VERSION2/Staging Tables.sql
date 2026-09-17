@@ -19,7 +19,7 @@ CREATE TABLE Stg_Malaria_Permanent(
 		PRIMARY KEY (BatchID, Region, District, Year, Month, AgeGroup, Gender, FacilityID)
 );
 
-
+GO 
 
 
 ---Staging Table Population
@@ -39,6 +39,7 @@ CREATE TABLE Stg_Population_Pivoted(
 
 );
 
+GO
 ---STAGING TABLE 2(POPULATION) Stg_Population_Unpivoted
 
 CREATE TABLE Stg_Population_Unpivoted(
@@ -52,12 +53,6 @@ CREATE TABLE Stg_Population_Unpivoted(
 
 
 
-
-USE MLanding1
-
-SELECT * FROM DimDate;
-
-GO
 
 
 

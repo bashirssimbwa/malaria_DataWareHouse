@@ -59,7 +59,7 @@ conn_str = (
 params = urllib.parse.quote_plus(conn_str)
 engine = create_engine(f"mssql+pyodbc:///?odbc_connect={params}", fast_executemany=True)
 
-# Loop over files and push them safely one by one
+# Loops over files and pushes them safely one by one
 for file in all_files:
     file_name = os.path.basename(file)
     print(f"Processing File Target: {file_name}")

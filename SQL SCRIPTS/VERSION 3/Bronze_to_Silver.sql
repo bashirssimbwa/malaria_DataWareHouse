@@ -1,44 +1,45 @@
 USE MLanding1;
 
-
-USE MLanding1;
 GO
 
+---USP to Automatically Insert data into the Permanent Staging Table
 ALTER PROCEDURE dbo.SP_ETL_Stage1_Bronze_To_Silver
  @SourceTableName NVARCHAR(100),
  @ReportingYear INT,
  @BatchID UNIQUEIDENTIFIER
 AS
 BEGIN
- SET NOCOUNT ON;
+    SET NOCOUNT ON;
 
  DELETE FROM Stg_Malaria_Permanent 
  WHERE Year = @ReportingYear;
  
- DECLARE @DynamicSQL NVARCHAR(MAX) = '';
- DECLARE @cross_apply_values NVARCHAR(MAX) = '';
+ DECLARE @Sql NVARCHAR(MAX);
+ DECLARE @cross_apply_values NVARCHAR(MAX);
  
- --HEADER STRING AGGREGATION PATTERN
- -- Maps raw python columns cleanly into unpivot value tuple matrices
- SELECT @cross_apply_values = STRING_AGG(
-    '(''' + COLUMN_NAME + ''', ' + CAST(QUOTENAME(COLUMN_NAME) AS NVARCHAR(MAX)) + ')' , 
- ',')
+ --1.  Building  a dynamic column list from source table
+ 
+ SELECT @cross_apply_values = STRING_AGG( '(''' + COLUMN_NAME + ''', ' + CAST(QUOTENAME(COLUMN_NAME) AS NVARCHAR(MAX)) + ')' , ',')
  FROM MLanding1.INFORMATION_SCHEMA.COLUMNS
  WHERE TABLE_NAME = @SourceTableName
-   AND (COLUMN_NAME LIKE '105-EP01c%' OR COLUMN_NAME LIKE '105-EP01d%' 
-     OR COLUMN_NAME LIKE '105-MC04%' OR COLUMN_NAME LIKE '105-EP01b%');
+   AND (COLUMN_NAME LIKE '%105-EP01c%' -- Confirmed Cases
+   OR COLUMN_NAME LIKE '%105-EP01d%'  -- Treated Cases
+     OR COLUMN_NAME LIKE '%105-MC04%' -- Pregnancy Cases 
+     OR COLUMN_NAME LIKE '%105-EP01b%'); -- TotalCases Recorded
 
- -- 2. FIXED DYNAMIC TEMPLATE STRING GENERATOR
- SET @DynamicSQL = '
+ -- 2. DynamicSQL  String generator
+ SET @Sql = '
  WITH RawUnpivoted AS (
      SELECT
-         organisationunitid AS FacilityID,
-         LTRIM(RTRIM(orgunitlevel2)) AS Region,
-         LTRIM(RTRIM(organisationunitname)) AS District,
+         TRIM(organisationunitid) AS FacilityID,
+         TRIM(orgunitlevel2) AS Region,
+         TRIM(organisationunitname) AS District,
          ColName,
          TRY_CAST(Value AS INT) AS Value
      FROM [MLanding1].dbo.' + QUOTENAME(@SourceTableName) + '
-     -- Added separating keyword space here
+
+    -- Using CROSS APPLY to retain Both null and Non-null values
+
      CROSS APPLY (
          VALUES ' + @cross_apply_values + '
      ) AS unpiv(ColName, [Value])
@@ -108,9 +109,10 @@ BEGIN
      END AS DataQualityFlag
  FROM PivotPayload;';
 
- EXEC sp_executesql @DynamicSQL;
+ EXEC sp_executesql @Sql;
 END;
 GO
+
 
 
 

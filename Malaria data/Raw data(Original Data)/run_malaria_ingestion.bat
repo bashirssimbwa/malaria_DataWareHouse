@@ -3,7 +3,7 @@ echo ===================================================
 echo STARTING MALARIA DATA PIPELINE INGESTION LOOP
 echo ======================================================
 
-:: Step 1: Install or verify missing depencies from the requirements file
+:: Step 1: Install or verify missing dependencies from the requirements file
 echo Checking and installing project dependencies...
 "C:\Python314\python.exe" -m pip install -r "D:\Data Analyst\MALARIA ANALYTICS\FULL PROJECT\Malaria data\Raw data(Original Data)\requirements.txt"
 
