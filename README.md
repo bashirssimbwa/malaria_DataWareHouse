@@ -30,7 +30,7 @@ Development of a data Warehouse for Malaria Records in Uganda Between 2020 to 20
 **Directory Overview**
 -**Automation/:** - Houses the scheduling configuring scripts. The native SQL Server Agent uses these files to trigger the Python streaming components via OS commands (CmdExec) before firing internal databases engine
  - **database/:** - Conatains the structural blueprint of the warehouse. Objects are explicitly sorted into custom schemas(bronze, stage, gold, audit, rpt) to enforce strict security perimeters and eliminate clutter.
- - **dbt_analytics/** - Configured as localized data governance suite. It translates descriptive YAML rules into live verification models , compiling automated alerts directly into audi.DataQaulityCheckLogs and audit.my_first_dbt_model.
+ - **dbt_analytics/** - Configured as localized data governance suite. It translates descriptive YAML rules into live verification models , compiling automated alerts directly into **audi.DataQaulityCheckLogs** and **audit.my_first_dbt_model**.
  - **ingestion/:** Python-driven Extract and Load framework. It reads raw malaria CSV files into 
 the bronze scehma into SQLServer Management system.
 - **stored_procedures:** Houses the transactional processing units of the warehouse. Automates steps fom ingestion of data into thestaging Zone upto ingestion into the  Fact and dimensions.
