@@ -23,8 +23,9 @@ Development of a data Warehouse for Malaria Records in Uganda Between 2020 to 20
 
 
    ## 2. Repository File Structure
-   - This repsoitory is partitioned into clear directories. 
-   ├── .github/
+   - This repsoitory is partitioned into clear directories.
+      
+├── .github/
 │   └── workflows/              # CI/CD pipelines for automated dbt testing on commit
 ├── automation/
 │   ├── run_etl_pipeline.bat    # Windows Batch wrapper orchestrating the full execution loop
