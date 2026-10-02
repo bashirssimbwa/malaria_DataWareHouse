@@ -1,7 +1,9 @@
 USE MLanding1;
 
+
+--Non Compliance(Facilities that are not reporting malaria measures)
 WITH Non_compliant AS (
-SELECT g.Source_FacilityID,g.RegionName, g.DistrictName, a.AgeGroup, r.Gender,  d.Year, d.MonthName, f.ConfirmedCases, f.TotalCases, f.TreatedCases FROM gold.Fact_Malaria f
+SELECT g.Source_FacilityID,g.RegionName,d.DateKey, g.GeographyKey, g.DistrictName, a.AgeGroup, r.Gender,  d.Year, d.MonthName, f.ConfirmedCases, f.TotalCases, f.TreatedCases FROM gold.Fact_Malaria f
  INNER JOIN gold.DimGeography g ON f.Geographykey = g.Geographykey
  INNER JOIN gold.DimDate d ON f.DateKey = d.DateKey
  INNER JOIN gold.DimGender r ON f.GenderKey = r.GenderKey  
@@ -10,9 +12,9 @@ WHERE f.ConfirmedCases IS NULL
 OR f.TotalCases IS NULL 
 OR f.TreatedCases IS NULL
 )
-SELECT h.Source_FacilityID AS [FacilityID], h.RegionName AS Region, h.DistrictName AS District,
-h.AgeGroup, h.Gender,
-h.Year As [Year] , h.MonthName AS [MonthName], h.ConfirmedCases AS [ConfirmedCases], h.TotalCases AS [TotalCases] , h.TreatedCases
+SELECT h.Source_FacilityID AS [FacilityID],h.GeographyKey, h.DateKey,  h.RegionName AS Region, h.DistrictName AS District,
+		h.AgeGroup, h.Gender,
+		h.Year As [Year] , h.MonthName AS [MonthName], h.ConfirmedCases AS [ConfirmedCases], h.TotalCases AS [TotalCases] , h.TreatedCases
 FROM Non_Compliant h
 
  ;
@@ -20,10 +22,10 @@ FROM Non_Compliant h
 
  --Non-Compliant View
 
- CREATE VIEW Non_compliant_vw AS 
+ ALTER VIEW Non_compliant_vw AS  
 
 WITH Non_compliant AS (
-SELECT g.Source_FacilityID,g.RegionName, g.DistrictName, a.AgeGroup, r.Gender,  d.Year, d.MonthName, f.ConfirmedCases, f.TotalCases, f.TreatedCases FROM gold.Fact_Malaria f
+SELECT g.Source_FacilityID,g.RegionName,d.DateKey, g.GeographyKey, g.DistrictName, a.AgeGroup, r.Gender,  d.Year, d.MonthName, f.ConfirmedCases, f.TotalCases, f.TreatedCases FROM gold.Fact_Malaria f
  INNER JOIN gold.DimGeography g ON f.Geographykey = g.Geographykey
  INNER JOIN gold.DimDate d ON f.DateKey = d.DateKey
  INNER JOIN gold.DimGender r ON f.GenderKey = r.GenderKey  
@@ -32,10 +34,9 @@ WHERE f.ConfirmedCases IS NULL
 OR f.TotalCases IS NULL 
 OR f.TreatedCases IS NULL
 )
-SELECT h.Source_FacilityID AS [FacilityID], h.RegionName AS Region, h.DistrictName AS District,
-h.AgeGroup, h.Gender,
-h.Year As [Year] , h.MonthName AS [MonthName], h.ConfirmedCases AS [ConfirmedCases], h.TotalCases AS [TotalCases] , h.TreatedCases
+SELECT h.Source_FacilityID AS [FacilityID],h.GeographyKey, h.DateKey,  h.RegionName AS Region, h.DistrictName AS District,
+		h.AgeGroup, h.Gender,
+		h.Year As [Year] , h.MonthName AS [MonthName], h.ConfirmedCases AS [ConfirmedCases], h.TotalCases AS [TotalCases] , h.TreatedCases
 FROM Non_Compliant h
-
  ;
 

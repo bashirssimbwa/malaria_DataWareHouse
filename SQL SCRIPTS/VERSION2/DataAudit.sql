@@ -28,3 +28,38 @@ CREATE TABLE DataQualityCheckLogs(
 		CheckTimestamp  DATETIME DEFAULT GETDATE()
 );
 GO
+
+
+--Bronze To Silver 
+
+CREATE TABLE audit.Bronze_silver(
+	LogID INT IDENTITY(1,1) PRIMARY KEY, 
+	BatchID UNIQUEIDENTIFIER NOT NULL,
+	TasKName VARCHAR(100) NOT NULL, 
+	TargetTable VARCHAR(100) NOT NULL,
+	[Status] VARCHAR(20) NOT NULL,
+	RowsRead INT DEFAULT 0,
+	RowsWritten INT DEFAULT 0,
+	StartTime DATETIME  DEFAULT GETDATE(),
+	EndTime DATETIME NULL,
+	ErrorMessage NVARCHAR(MAX)
+);
+
+GO
+
+
+--Silver To Gold(Facts)
+
+CREATE TABLE audit.Bronze_To_Gold_Facts(
+	LogID INT IDENTITY(1,1) PRIMARY KEY,
+	BatchID UNIQUEIDENTIFIER NOT NULL,
+	TaskName VARCHAR(100) NOT NULL,
+	SourceTable VARCHAR(50) NOT NULL,
+	TargetTable VARCHAR(50) NOT NULL,
+	Rowswritten INT DEFAULT 0,
+	StartTime DATETIME DEFAULT GETDATE(),
+	EndTime DATETIME NULL,
+	ErrorMessage NVARCHAR(MAX)
+);
+
+GO

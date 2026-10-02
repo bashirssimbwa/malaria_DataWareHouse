@@ -97,6 +97,7 @@ for file in all_files:
     df1.to_sql(
         name=target_table,
         con=engine,
+        schema = 'bronze',
         if_exists="replace",
         index=False,
         chunksize=5000

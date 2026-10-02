@@ -62,7 +62,16 @@ CREATE TABLE Fact_Malaria(
 	CONSTRAINT FK_Date_Key FOREIGN KEY(DateKey) REFERENCES DimDate(DateKey)
 );
 
+--Enforcing Uniqueness to prevent Duplicate Inserts(Idempotency)
 
+CREATE UNIQUE INDEX UX_Fact_Malaria_BusinessKey
+ON gold.Fact_Malaria
+(
+	AgeKey,
+	GenderKey,
+	GeographyKey,
+	DateKey
+);
 
 
 -----Fact Population
