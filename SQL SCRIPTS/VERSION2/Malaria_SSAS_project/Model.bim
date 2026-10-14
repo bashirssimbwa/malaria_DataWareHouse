@@ -1,0 +1,489 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1700,
+  "model": {
+    "culture": "en-ZA",
+    "discourageImplicitMeasures": true,
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/DESKTOP-U507UFU\\MSSQLSERVER01;MLanding1",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "DESKTOP-U507UFU\\MSSQLSERVER01",
+            "database": "MLanding1"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "Windows",
+          "kind": "SQL",
+          "path": "desktop-u507ufu\\mssqlserver01;MLanding1",
+          "Username": "desktop-u507ufu\\user",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "Fact_population_vw",
+        "columns": [
+          {
+            "name": "FactID",
+            "dataType": "int64",
+            "sourceColumn": "FactID"
+          },
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey"
+          },
+          {
+            "name": "GeographyKey",
+            "dataType": "int64",
+            "sourceColumn": "GeographyKey"
+          },
+          {
+            "name": "Estimated_Population",
+            "dataType": "int64",
+            "sourceColumn": "Estimated_Population"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-U507UFU\\MSSQLSERVER01;MLanding1\",",
+                "    dbo_Fact_population_vw = Source{[Schema=\"dbo\",Item=\"Fact_population_vw\"]}[Data]",
+                "in",
+                "    dbo_Fact_population_vw"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_agegroup_vw",
+        "columns": [
+          {
+            "name": "AgeKey",
+            "dataType": "int64",
+            "sourceColumn": "AgeKey"
+          },
+          {
+            "name": "AgeGroup",
+            "dataType": "string",
+            "sourceColumn": "AgeGroup"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-U507UFU\\MSSQLSERVER01;MLanding1\",",
+                "    dbo_dim_agegroup_vw = Source{[Schema=\"dbo\",Item=\"dim_agegroup_vw\"]}[Data]",
+                "in",
+                "    dbo_dim_agegroup_vw"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_date_vw",
+        "columns": [
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey"
+          },
+          {
+            "name": "FullDate",
+            "dataType": "dateTime",
+            "sourceColumn": "FullDate"
+          },
+          {
+            "name": "Year",
+            "dataType": "int64",
+            "sourceColumn": "Year"
+          },
+          {
+            "name": "Quarter",
+            "dataType": "int64",
+            "sourceColumn": "Quarter"
+          },
+          {
+            "name": "Month",
+            "dataType": "int64",
+            "sourceColumn": "Month"
+          },
+          {
+            "name": "MonthName",
+            "dataType": "string",
+            "sourceColumn": "MonthName"
+          },
+          {
+            "name": "YearMonth",
+            "dataType": "string",
+            "sourceColumn": "YearMonth"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-U507UFU\\MSSQLSERVER01;MLanding1\",",
+                "    dbo_dim_date_vw = Source{[Schema=\"dbo\",Item=\"dim_date_vw\"]}[Data]",
+                "in",
+                "    dbo_dim_date_vw"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_gender_vw",
+        "columns": [
+          {
+            "name": "GenderKey",
+            "dataType": "int64",
+            "sourceColumn": "GenderKey"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-U507UFU\\MSSQLSERVER01;MLanding1\",",
+                "    dbo_dim_gender_vw = Source{[Schema=\"dbo\",Item=\"dim_gender_vw\"]}[Data]",
+                "in",
+                "    dbo_dim_gender_vw"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_geography_vw",
+        "columns": [
+          {
+            "name": "GeographyKey",
+            "dataType": "int64",
+            "sourceColumn": "GeographyKey"
+          },
+          {
+            "name": "Source_FacilityID",
+            "dataType": "string",
+            "sourceColumn": "Source_FacilityID"
+          },
+          {
+            "name": "DistrictName",
+            "dataType": "string",
+            "sourceColumn": "DistrictName"
+          },
+          {
+            "name": "RegionName",
+            "dataType": "string",
+            "sourceColumn": "RegionName"
+          },
+          {
+            "name": "IsCity",
+            "dataType": "boolean",
+            "sourceColumn": "IsCity"
+          },
+          {
+            "name": "ValidFrom",
+            "dataType": "dateTime",
+            "sourceColumn": "ValidFrom"
+          },
+          {
+            "name": "ValidTo",
+            "dataType": "dateTime",
+            "sourceColumn": "ValidTo"
+          },
+          {
+            "name": "IsCurrent",
+            "dataType": "boolean",
+            "sourceColumn": "IsCurrent"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-U507UFU\\MSSQLSERVER01;MLanding1\",",
+                "    dbo_dim_geography_vw = Source{[Schema=\"dbo\",Item=\"dim_geography_vw\"]}[Data]",
+                "in",
+                "    dbo_dim_geography_vw"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Malaria_fact_vw",
+        "columns": [
+          {
+            "name": "FactID",
+            "dataType": "int64",
+            "sourceColumn": "FactID"
+          },
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey"
+          },
+          {
+            "name": "GenderKey",
+            "dataType": "int64",
+            "sourceColumn": "GenderKey"
+          },
+          {
+            "name": "AgeKey",
+            "dataType": "int64",
+            "sourceColumn": "AgeKey"
+          },
+          {
+            "name": "GeographyKey",
+            "dataType": "int64",
+            "sourceColumn": "GeographyKey"
+          },
+          {
+            "name": "ConfirmedCases",
+            "dataType": "int64",
+            "sourceColumn": "ConfirmedCases"
+          },
+          {
+            "name": "TreatedCases",
+            "dataType": "int64",
+            "sourceColumn": "TreatedCases"
+          },
+          {
+            "name": "PregnantCases",
+            "dataType": "int64",
+            "sourceColumn": "PregnantCases"
+          },
+          {
+            "name": "TotalCases",
+            "dataType": "int64",
+            "sourceColumn": "TotalCases"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-U507UFU\\MSSQLSERVER01;MLanding1\",",
+                "    dbo_Malaria_fact_vw = Source{[Schema=\"dbo\",Item=\"Malaria_fact_vw\"]}[Data]",
+                "in",
+                "    dbo_Malaria_fact_vw"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Non_compliant_vw",
+        "columns": [
+          {
+            "name": "FacilityID",
+            "dataType": "string",
+            "sourceColumn": "FacilityID"
+          },
+          {
+            "name": "GeographyKey",
+            "dataType": "int64",
+            "sourceColumn": "GeographyKey"
+          },
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey"
+          },
+          {
+            "name": "Region",
+            "dataType": "string",
+            "sourceColumn": "Region"
+          },
+          {
+            "name": "District",
+            "dataType": "string",
+            "sourceColumn": "District"
+          },
+          {
+            "name": "AgeGroup",
+            "dataType": "string",
+            "sourceColumn": "AgeGroup"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "Year",
+            "dataType": "int64",
+            "sourceColumn": "Year"
+          },
+          {
+            "name": "MonthName",
+            "dataType": "string",
+            "sourceColumn": "MonthName"
+          },
+          {
+            "name": "ConfirmedCases",
+            "dataType": "int64",
+            "sourceColumn": "ConfirmedCases"
+          },
+          {
+            "name": "TotalCases",
+            "dataType": "int64",
+            "sourceColumn": "TotalCases"
+          },
+          {
+            "name": "TreatedCases",
+            "dataType": "int64",
+            "sourceColumn": "TreatedCases"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-U507UFU\\MSSQLSERVER01;MLanding1\",",
+                "    dbo_Non_compliant_vw = Source{[Schema=\"dbo\",Item=\"Non_compliant_vw\"]}[Data]",
+                "in",
+                "    dbo_Non_compliant_vw"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "MissingConfirmedCases",
+            "expression": " COUNTBLANK('Non_compliant_vw'[ConfirmedCases])"
+          },
+          {
+            "name": "Missing Total Cases",
+            "expression": [
+              " COUNTBLANK(",
+              "    'Non_compliant_vw'[TotalCases]",
+              ")"
+            ]
+          },
+          {
+            "name": "Missing Treated Cases",
+            "expression": [
+              "",
+              "COUNTBLANK('Non_compliant_vw'[TreatedCases])"
+            ]
+          },
+          {
+            "name": "Total Cases Confirmed",
+            "expression": " SUM(Malaria_fact_vw[ConfirmedCases])"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "57892de2-28b0-4ba4-ac5f-23d668763c20",
+        "fromTable": "Malaria_fact_vw",
+        "fromColumn": "DateKey",
+        "toTable": "dim_date_vw",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "3cb442e8-960d-49ef-8e02-3966ac2bf327",
+        "fromTable": "Malaria_fact_vw",
+        "fromColumn": "GenderKey",
+        "toTable": "dim_gender_vw",
+        "toColumn": "GenderKey"
+      },
+      {
+        "name": "dac588f6-549b-4eef-83af-b18fd8f59bfd",
+        "fromTable": "Malaria_fact_vw",
+        "fromColumn": "GeographyKey",
+        "toTable": "dim_geography_vw",
+        "toColumn": "GeographyKey"
+      },
+      {
+        "name": "d3fc4586-a700-482c-86d5-89b9fd774a47",
+        "fromTable": "Malaria_fact_vw",
+        "fromColumn": "AgeKey",
+        "toTable": "dim_agegroup_vw",
+        "toColumn": "AgeKey"
+      },
+      {
+        "name": "b506784b-7d50-47a7-acda-8014fec1bbc9",
+        "fromTable": "Fact_population_vw",
+        "fromColumn": "DateKey",
+        "toTable": "dim_date_vw",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "662827e5-740c-4b9c-8cad-c5dfc5d6461f",
+        "fromTable": "Fact_population_vw",
+        "fromColumn": "GeographyKey",
+        "toTable": "dim_geography_vw",
+        "toColumn": "GeographyKey"
+      },
+      {
+        "name": "ac75939a-0981-4123-acd2-d07fccc2d404",
+        "fromTable": "Non_compliant_vw",
+        "fromColumn": "GeographyKey",
+        "toTable": "dim_geography_vw",
+        "toColumn": "GeographyKey"
+      },
+      {
+        "name": "8c012804-b8f5-4bdd-85c6-be2889f398f6",
+        "fromTable": "Non_compliant_vw",
+        "fromColumn": "GeographyKey",
+        "toTable": "dim_date_vw",
+        "toColumn": "DateKey"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "800"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}

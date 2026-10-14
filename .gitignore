@@ -1,0 +1,12 @@
+# Visual Studio / SSAS build artifacts
+**/bin/
+**/obj/
+**/.vs/
+*.user
+*.suo
+
+# Specific SSAS folders
+SQL SCRIPTS/VERSION2/Malaria_SSAS_project/bin/
+SQL SCRIPTS/VERSION2/Malaria_SSAS_project/obj/
+SQL SCRIPTS/VERSION2/Malaria_SSAS_project/**/bin/
+SQL SCRIPTS/VERSION2/Malaria_SSAS_project/**/obj/
