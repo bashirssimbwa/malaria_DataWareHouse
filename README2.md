@@ -103,7 +103,7 @@ The working scope is malaria records covering **2020-2024**, aggregated by repor
 ## Architecture
 
 <p align="center">
-  <a href="./docs/architecture/pipeline-architecture.svg"><img src="./docs/architecture/pipeline-architecture.svg" alt="MalariaDW pipeline architecture" width="100%" /></a>
+  <a href="./docs/architecture/pipeline-architecture.png"><img src="./docs/architecture/pipeline-architecture.png" alt="MalariaDW pipeline architecture" width="100%" /></a>
 </p>
 
 **Current flow:** DHIS2 CSV export -> Python ingestion -> Bronze landing -> T-SQL unpivot/standardization into the current-batch staging workspace -> Gold dimensions and fact tables -> SSAS/Power BI and other analytical consumers.
@@ -159,7 +159,7 @@ The SQL Server Agent job currently has a Python-ingestion CmdExec step and a T-S
 ## Data model
 
 <p align="center">
-  <a href="./docs/architecture/warehouse-model.svg"><img src="./docs/architecture/warehouse-model.svg" alt="MalariaDW dimensional model" width="100%" /></a>
+  <a href="./docs/architecture/warehouse-model.png"><img src="./docs/architecture/warehouse-model.png" alt="MalariaDW dimensional model" width="100%" /></a>
 </p>
 
 ### Core fact and dimensions
