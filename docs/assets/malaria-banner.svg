@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="250" viewBox="0 0 1200 250">
+<defs>
+ <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#102a43"/><stop offset="1" stop-color="#163e5c"/></linearGradient>
+ <linearGradient id="accent" x1="0" x2="1"><stop offset="0" stop-color="#22c55e"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+</defs>
+<rect width="1200" height="250" rx="28" fill="url(#bg)"/>
+<circle cx="1090" cy="46" r="120" fill="#ffffff" opacity=".045"/><circle cx="1035" cy="220" r="92" fill="#ffffff" opacity=".04"/>
+<path d="M820 0 C900 65, 900 165, 1010 250" stroke="#63b3ed" stroke-width="2" fill="none" opacity=".35"/>
+<path d="M900 0 C985 72, 1000 165, 1120 250" stroke="#22c55e" stroke-width="2" fill="none" opacity=".45"/>
+<rect x="58" y="44" width="9" height="160" rx="4" fill="url(#accent)"/>
+<text x="92" y="94" fill="#d9f99d" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="3">PUBLIC HEALTH DATA ENGINEERING</text>
+<text x="92" y="145" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">Malaria Data Warehouse</text>
+<text x="92" y="181" fill="#dbeafe" font-family="Arial, Helvetica, sans-serif" font-size="20">Uganda | 2020-2024 | On-premise ELT case study</text>
+<rect x="92" y="204" width="292" height="25" rx="12" fill="#ffffff" opacity=".11"/>
+<text x="108" y="221" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600">SQL Server  |  Python  |  Power BI</text>
+</svg>
