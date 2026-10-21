@@ -53,6 +53,7 @@ GO
 CREATE TABLE audit.Bronze_To_Gold_Facts(
 	LogID INT IDENTITY(1,1) PRIMARY KEY,
 	BatchID UNIQUEIDENTIFIER NOT NULL,
+	Satus VARCHAR(20),
 	TaskName VARCHAR(100) NOT NULL,
 	SourceTable VARCHAR(50) NOT NULL,
 	TargetTable VARCHAR(50) NOT NULL,
@@ -63,3 +64,21 @@ CREATE TABLE audit.Bronze_To_Gold_Facts(
 );
 
 GO
+
+
+
+--Silver to Gold (Dimesions)
+
+CREATE TABLE audit.silver_to_gold_dimensions(
+        LogID INT IDENTITY(1,1) PRIMARY KEY,
+		BatchID UNIQUEIDENTIFIER NOT NULL,
+		[status] VARCHAR(20),
+		TaskName VARCHAR(100) NOT NULL,
+		SourceTable VARCHAR(100) NOT NULL,
+		TargetTable VARCHAR(50) NOT NULL,
+		StartTime DATETIME DEFAULT GETDATE(),
+		EndTime DATETIME NULL,
+		ErrorMessage NVARCHAR(MAX)
+);
+
+
