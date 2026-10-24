@@ -20,7 +20,7 @@
 
 # Malaria Data Warehouse | Uganda, 2020-2024
 
-An **on-premise ELT and dimensional-warehouse engineering case study** for preparing monthly DHIS2-exported malaria records from Uganda for downstream public-health analytics. The project combines Python-based file ingestion, SQL Server landing and transformation layers, stored-procedure orchestration, dimensional modelling, data-quality reconciliation, execution logging, email notifications and analytical serving.
+An **on-premise ELT and dimensional-warehouse engineering case study** for preparing monthly DHIS2-exported malaria records from Uganda for downstream public-health analytics. The project combines Python-based file ingestion, SQL Server landing and transformation layers, stored-procedure orchestration, dimensional modelling, data-quality reconciliation, execution logging, email notifications and SSAS(SQL Server Analytical Services) for analytical serving.
 
 > **Scope note:** This is a portfolio/research engineering prototype, not a certified Ministry of Health production system or a clinical decision-support product. Findings are descriptive; observed trends do not establish that a particular intervention caused a change in cases.
 
@@ -62,9 +62,9 @@ An **on-premise ELT and dimensional-warehouse engineering case study** for prepa
 
 Public-health dashboards are only as trustworthy as the data preparation, transformation and validation behind them. This project explores how to turn wide, matrix-shaped CSV exports into structured analytics tables using an explicit, testable batch pipeline.
 
-The working scope is malaria records covering **2020-2024**, aggregated by reporting period and geographic and demographic attributes. The source files are DHIS2 exports placed in a configured local folder; Python performs ingestion, while SQL Server handles transformation, warehouse loading, audit records and analytical storage.
+The working scope is malaria records covering **2020-2024**, aggregated by reporting period and geographic and demographic attributes. The source files are DHIS2 exports placed in a local folder; Python performs ingestion, while SQL Server handles transformation, warehouse loading, audit records and analytical storage.
 
-### Why this project exists
+### Project Significance
 
 - Convert wide exported reports into a consistent relational structure.
 - Keep raw landing data available for investigation and controlled reprocessing.
@@ -76,13 +76,13 @@ The working scope is malaria records covering **2020-2024**, aggregated by repor
 ## Objectives
 
 1. **Reliable ingestion:** load source CSV exports and preserve batch-level traceability.
-2. **Schema normalization at the data-preparation stage:** unpivot wide metric columns and standardize values into a row-oriented staging structure. This is data-shape standardization; it should not be confused with relational normalization into 3NF.
-3. **Dimensional modelling:** expose fact and dimension tables in a Gold/reporting layer.
+2. **Schema normalization at the data-preparation stage:** unpivot wide metric columns and standardize values into a row-oriented staging structure. This is data-shape standardization.
+3. **Dimensional modelling:** expose fact and dimension tables in a Gold/reporting layer to be used by the  Semantic Layer for research, ad-hoc reports and Machine Learning for predictive analytics.
 4. **Historical context:** use SCD Type 2 for applicable mutable geographic attributes, maintaining effective dates and surrogate keys.
 5. **Data integrity:** apply transaction handling to coherent database operations and enforce fact-grain uniqueness at the database boundary.
 6. **Data quality:** compare source and target measures, log validation outcomes and investigate rejected or anomalous records.
 7. **Operational traceability:** record step status, row counts, timestamps, errors and BatchID relationships.
-8. **Analytics delivery:** serve data to Power BI and the analytical semantic layer, with gateway-supported refresh where configured.
+8. **Analytics delivery:** serve data to downstream analytical use-cases like Power Bi, ArcGIS and Machine Learning notebooks via analytical semantic layer in SSAS, The SSAS models ingest source data from  SQL Server Views, store prebuilt DAX measures for uniform business logic(single source of truth).
 
 ## Technology stack
 
