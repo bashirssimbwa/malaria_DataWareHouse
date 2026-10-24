@@ -60,7 +60,7 @@ An **on-premise ELT and dimensional-warehouse engineering case study** for prepa
 
 ## Project overview
 
-Public-health dashboards are only as trustworthy as the data preparation, transformation and validation behind them. This project explores how to turn wide, matrix-shaped CSV exports into structured analytics tables using an explicit, testable batch pipeline.
+This project explores how to turn wide, matrix-shaped CSV exports into structured analytics tables using a reliable batch ELT pipeline.
 
 The working scope is malaria records covering **2020-2024**, aggregated by reporting period and geographic and demographic attributes. The source files are DHIS2 exports placed in a local folder; Python performs ingestion, while SQL Server handles transformation, warehouse loading, audit records and analytical storage.
 
