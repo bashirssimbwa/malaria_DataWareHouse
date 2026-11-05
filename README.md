@@ -25,7 +25,7 @@ Development of a data Warehouse for Malaria Records in Uganda Between 2020 to 20
 ## 2. Repository File Structure
    - This repsoitory is partitioned into clear directories.
       
-<img width="383" height="461" alt="image" src="https://github.com/user-attachments/assets/b37bc26b-d583-4dd1-af19-69c1a8b3ba1b" />
+<img width="383" height="461" alt="image" src=a8b3ba1b"" />
 
 **Directory Overview**
 -**Automation/:** - Houses the scheduling configuring scripts. The native SQL Server Agent uses these files to trigger the Python streaming components via OS commands (CmdExec) before firing internal databases engine
