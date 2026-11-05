@@ -32,7 +32,7 @@ GO
 
 --Bronze To Silver 
 
-CREATE TABLE audit.Bronze_silver(
+CREATE TABLE audit.bronze_to_silver(
 	LogID INT IDENTITY(1,1) PRIMARY KEY, 
 	BatchID UNIQUEIDENTIFIER NOT NULL,
 	TasKName VARCHAR(100) NOT NULL, 
@@ -50,7 +50,7 @@ GO
 
 --Silver To Gold(Facts)
 
-CREATE TABLE audit.Bronze_To_Gold_Facts(
+CREATE TABLE audit.silver_to_gold_facts(
 	LogID INT IDENTITY(1,1) PRIMARY KEY,
 	BatchID UNIQUEIDENTIFIER NOT NULL,
 	Satus VARCHAR(20),
