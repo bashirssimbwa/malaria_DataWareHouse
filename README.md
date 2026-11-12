@@ -18,9 +18,9 @@
   <a href="#roadmap"><img src="https://img.shields.io/badge/Explore-Roadmap-0f766e?style=flat-square" alt="Roadmap" /></a>
 </p>
 
-# Malaria Data Warehouse | Uganda, 2020-2024
+# Malaria Data Warehouse | 2020-2024
 
-An **on-premise ELT and dimensional-warehouse engineering case study** for preparing monthly DHIS2-exported malaria records from Uganda for downstream public-health analytics. The project combines Python-based file ingestion, SQL Server landing and transformation layers, stored-procedure orchestration, dimensional modelling, data-quality reconciliation, execution logging, email notifications and SSAS(SQL Server Analytical Services) for analytical serving.
+An **on-premise ELT and dimensional-warehouse engineering case study** for preparing monthly DHIS2-exported malaria records for downstream public-health analytics and Machine Learning. The project combines Python-based file ingestion, SQL Server landing and transformation layers, stored-procedure orchestration, dimensional modelling, data-quality reconciliation, execution logging, email notifications and SSAS(SQL Server Analytical Services) for analytical serving.
 
 > **Scope note:** This is a portfolio/research engineering prototype, not a certified Ministry of Health production system or a clinical decision-support product. Findings are descriptive; observed trends do not establish that a particular intervention caused a change in cases.
 
@@ -113,7 +113,7 @@ The control plane cuts across the flow: SQL Server Agent scheduling, stored-proc
 ### Architecture principles
 
 - **Bronze is recoverable landing data.** Retain source/batch context so a transformation can be investigated or rerun.
-- **Stage is a work area in the current design.** The latest Bronze-to-stage procedure uses `TRUNCATE` followed by a batch reload. This is not a historical staging ledger; keep history in Bronze or another explicit history store.
+- **Stage is a work area/transient layer.** The Bronze-to-stage stored  procedure uses `TRUNCATE` followed by a batch load. Since raw data is already kept in the database.
 - **Gold is durable analytical state.** Fact and dimension tables should have documented grain, keys and correction semantics.
 - **BatchID is traceability metadata.** It associates records with a pipeline run; it is not, by itself, a business key or idempotency guarantee.
 - **Quality outcomes are data.** Persist quality and reconciliation results rather than relying only on a successful SQL Agent status.
